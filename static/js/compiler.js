@@ -25,7 +25,7 @@ var editorCount = 0;
 // Data
 var data =
 {
-  args : "g++ -std=c++14 -O2 -Wall -pedantic -pthread ${cppFiles} && ./a.out",
+  args : "clang++ -std=c++14 -O2 -Wall -pedantic -Weffc++ -pthread ${cppFiles} && ./a.out",
 
   // reads in data from editor
   read : function() {
