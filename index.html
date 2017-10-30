@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang=en-us>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+  <title>Multi-file compiler</title>
+  <link href="/static/css/compiler.css" rel="stylesheet" type="text/css">
+  <link rel="shortcut icon" href="/favicon.ico">
+</head>
+<body>
+    <div id="editor">
+      <form>
+        <label>
+          <b>Compile Args:</b>    <span class="aside">(${cppFiles} will be replaced by all .cpp files)</span>
+          <input id="args" class="full">
+        </label>
+
+        <div id="fileSection">
+          <b>Files:</b>
+          <div id="files">
+          </div>
+          <button id="addfile">+ File</button>
+        </div>
+
+        <button id="compile">Compile</button>
+        <br />
+        <label>
+          <b>Console Output:</b>
+          <textarea id="output" class="full" readonly spellcheck="false">
+            
+          </textarea>
+        </label>
+          
+        </textarea>
+      </form>
+    </div>
+    <br />
+
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="/static/js/compiler.js"></script>
+    <script>
+      data.files = 
+      {
+        "main.cpp" : 
+`#include "test.hpp"
+int main() 
+{ 
+    test("hiya");
+    return 0; 
+}`,
+
+        "test.hpp" : 
+`#include <iostream>
+#include <string>
+void test(std::string msg) 
+{ 
+    std::cout << msg << std::endl; 
+} `
+      };
+
+      data.write();
+    </script>
+  </div>
+</body>
+</html>

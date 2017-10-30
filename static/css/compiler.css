@@ -1,0 +1,36 @@
+body {
+  font-family: sans-serif;
+}
+
+#editor {
+  max-width: 800px;
+  min-width: 200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.full {
+  width:100%;
+}
+
+.aside {
+  font-size: 0.7em;
+  float:right;
+}
+
+#args, #fileSection, #compile{
+  margin-bottom: 1em;
+}
+
+textarea {
+  min-height: 10em;
+  resize: none;
+}
+
+.file {
+  margin-top: 0.5em;
+}
+
+.file textarea {
+  margin-top: 0.1em;
+}
