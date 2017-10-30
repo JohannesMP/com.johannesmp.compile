@@ -18,19 +18,19 @@ body {
   float:right;
 }
 
-#args, #fileSection, #compile{
+#args, #filesection, #compile {
   margin-bottom: 1em;
 }
 
 textarea {
-  min-height: 10em;
   resize: none;
 }
 
-.file {
+.filecontent {
   margin-top: 0.5em;
+  min-height: 10em;
 }
 
-.file textarea {
+.file .filecontent {
   margin-top: 0.1em;
 }

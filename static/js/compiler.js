@@ -3,7 +3,7 @@ var url = "http://coliru.stacked-crooked.com/compile";
 var defaultEditorFile = `
       <input class="filename">
       <button class="removefile">Remove</button>
-      <textarea class="full filecontent" spellcheck="false"></textarea>
+      <pre class="full filecontent ace"></pre>
     `
 
 // Dom Elements
@@ -15,6 +15,10 @@ var editor =
   compile : $("#compile"),
   output  : $("#output")
 };
+
+var aceEditors = {};
+
+var editorCount = 0;
 
 // Data
 var data =
@@ -32,8 +36,14 @@ var data =
     fileElements.each(function() {
         var element = $(this);
         var filename = $(element.find("input.filename")[0]).val();
-        var filecontent = $(element.find('textarea.filecontent')[0]).text();
-        that.files[filename] = filecontent;
+        var contentElement = $(element.find('.filecontent')[0]);
+        var elementID = contentElement.attr('id');
+
+        var fileContent = aceEditors[elementID].getValue();
+
+        console.log(elementID);
+
+        that.files[filename] = fileContent;
       });
 
     return this;
@@ -66,21 +76,51 @@ $(document).ready(function() {
   })
 });
 
+function escapeHTML(input)
+{
+  return $("<div>").text(input).html()
+}
 
 function addEditorFile(filename, filecontent, select) {
+  ++editorCount;
+
+  // escape for ace
+  var content = escapeHTML(filecontent);
+
   var element = $(`<div class="file"></div>`)
   element.html(defaultEditorFile);
+  editor.files.append(element);
+  console.log(element);
+
   var nameElement = $(element.find(".filename")[0]);
   nameElement.val(filename);
-  $(element.find(".filecontent")[0]).html(filecontent);
+
+  var contentElement = $(element.find(".filecontent")[0])
+  contentElement.html(content);
+
+  var contentID = `editor_${editorCount}`
+  contentElement.attr('id', contentID);
+  console.log(contentElement);
+
+  // Set up ace editor
+  aceEditors[contentID] = ace.edit(contentID);
+  aceEditors[contentID].setOptions({ maxLines: Infinity });
+  aceEditors[contentID].$blockScrolling = Infinity;
+  aceEditors[contentID].setTheme("ace/theme/tomorrow_night");
+  aceEditors[contentID].getSession().setMode('ace/mode/c_cpp');
 
   var deleteButton = $(element.find(".removefile")[0]);
+
   deleteButton.click(function(e) {
     e.preventDefault();
+    // remove the ace editor backend
+    aceEditors[contentID].remove();
+    // remove the mapping
+    delete aceEditors[contentID];
+    // remove the dom element
     element.remove();
+    --editorCount;
   });
-
-  editor.files.append(element);
 
   if(select)
     $(nameElement).focus().select();
