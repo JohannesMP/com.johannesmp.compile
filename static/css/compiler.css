@@ -1,7 +1,3 @@
-body {
-  font-family: sans-serif;
-}
-
 #editor {
   max-width: 800px;
   min-width: 200px;
@@ -10,27 +6,63 @@ body {
 }
 
 .full {
-  width:100%;
+  width: 100%;
+}
+
+.jumbotron {
+  margin: 1rem 0;
+  padding-top: 1rem;
+  padding-bottom: 0.5rem;
+}
+
+.infotext {
+  overflow:hidden;
+}
+
+input, #output {
+  padding-left: 0.4em;
 }
 
 .aside {
   font-size: 0.7em;
-  float:right;
+  float: right;
+  margin-top: 0.4em;
 }
 
 #args, #filesection, #compile {
   margin-bottom: 1em;
 }
 
-textarea {
-  resize: none;
+.file
+{
+  position: relative;
+  transition: all 0.1s;
 }
 
-.filecontent {
-  margin-top: 0.5em;
+
+
+.filename {
+  float:left;
+  margin-bottom: 0.25em;
+}
+
+.removefile {
+  position: absolute;
+  right:0;
+}
+
+.filecontent, #output {
   min-height: 10em;
 }
 
-.file .filecontent {
-  margin-top: 0.1em;
+#addfile {
+  float:right;
+}
+#output {
+  background-color: black;
+  color:white;
+}
+
+.rounded {
+  border-radius: 10px;
 }

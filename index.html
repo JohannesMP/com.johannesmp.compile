@@ -4,34 +4,39 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
   <title>Multi-file compiler</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+  
   <link href="/static/css/compiler.css" rel="stylesheet" type="text/css">
+  <link href="/static/css/ace.css" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="/favicon.ico">
 </head>
 <body>
     <div id="editor">
+      <div class="jumbotron clearfix">
+        <h1>Multi-file C++ Compiler</h1>
+        <p class="lead float-left">By <a href="github.com/JohannesMP">JohannesMP</a></p>
+        <p class="lead float-right">Powered by <a href="http://coliru.stacked-crooked.com/">http://coliru.stacked-crooked.com/</a></p>
+      </div>
+
       <form>
-        <label>
-          <b>Compile Args:</b>    <span class="aside">(${cppFiles} will be replaced by all .cpp files)</span>
-          <input id="args" class="full">
+        <label class="full">
+          <b>Compile Args:</b> 
+          <span class="aside"><em><b>${cppFiles}</b> is replaced by all .cpp files</em></span>
+          <input id="args" class="form-control">
         </label>
 
         <div id="filesection">
           <b>Files:</b>
           <div id="files">
           </div>
-          <button id="addfile">+ File</button>
+          <button id="addfile" class="btn btn-primary">+ File</button>
         </div>
 
-        <button id="compile">Compile</button>
+        <button id="compile" class="btn btn-success">Compile</button>
         <br />
-        <label>
-          <b>Console Output:</b>
-          <textarea id="output" class="full" readonly spellcheck="false">
-            
-          </textarea>
-        </label>
-          
-        </textarea>
+        <b>Console Output:</b>
+        <pre id="output" class="full rounded" readonly spellcheck="false"></pre>
       </form>
     </div>
     <br />

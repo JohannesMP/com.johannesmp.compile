@@ -1,9 +1,11 @@
 var url = "http://coliru.stacked-crooked.com/compile";
 
 var defaultEditorFile = `
-      <input class="filename">
-      <button class="removefile">Remove</button>
-      <pre class="full filecontent ace"></pre>
+    <div class="form-group">
+      <input class="filename form-control">
+      <button class="removefile btn btn-danger">Remove</button>
+      <pre class="filecontent full rounded"></pre>
+    </div>
     `
 
 // Dom Elements
@@ -41,8 +43,6 @@ var data =
 
         var fileContent = aceEditors[elementID].getValue();
 
-        console.log(elementID);
-
         that.files[filename] = fileContent;
       });
 
@@ -55,7 +55,6 @@ var data =
     editor.files.html("");
     for(var filename in this.files)
     {
-      console.log("creating file: " + filename);
       var content = this.files[filename];
       addEditorFile(filename, content);
     }
@@ -81,7 +80,12 @@ function escapeHTML(input)
   return $("<div>").text(input).html()
 }
 
-function addEditorFile(filename, filecontent, select) {
+function addEditorFile(filename, filecontent, byUser) {
+  if(byUser)
+    console.log("File added");
+  else
+    console.log(`File added: ${filename}`);
+
   ++editorCount;
 
   // escape for ace
@@ -90,7 +94,6 @@ function addEditorFile(filename, filecontent, select) {
   var element = $(`<div class="file"></div>`)
   element.html(defaultEditorFile);
   editor.files.append(element);
-  console.log(element);
 
   var nameElement = $(element.find(".filename")[0]);
   nameElement.val(filename);
@@ -100,11 +103,14 @@ function addEditorFile(filename, filecontent, select) {
 
   var contentID = `editor_${editorCount}`
   contentElement.attr('id', contentID);
-  console.log(contentElement);
 
   // Set up ace editor
   aceEditors[contentID] = ace.edit(contentID);
-  aceEditors[contentID].setOptions({ maxLines: Infinity });
+  aceEditors[contentID].setOptions({
+    maxLines: Infinity, 
+    fontSize: "12pt",
+
+  });
   aceEditors[contentID].$blockScrolling = Infinity;
   aceEditors[contentID].setTheme("ace/theme/tomorrow_night");
   aceEditors[contentID].getSession().setMode('ace/mode/c_cpp');
@@ -113,6 +119,8 @@ function addEditorFile(filename, filecontent, select) {
 
   deleteButton.click(function(e) {
     e.preventDefault();
+    console.log(`File Removed ${filename}`);
+
     // remove the ace editor backend
     aceEditors[contentID].remove();
     // remove the mapping
@@ -122,7 +130,7 @@ function addEditorFile(filename, filecontent, select) {
     --editorCount;
   });
 
-  if(select)
+  if(byUser)
     $(nameElement).focus().select();
 }
 
