@@ -1,5 +1,5 @@
 /* Ensure that we're usable on mobile */
-body { zoom: 0.7; }
+body { zoom: 0.7;  }
 @media (min-width:  576px) { body { zoom: 0.8; } }
 @media (min-width:  768px) { body { zoom: 0.9; } }
 @media (min-width:  992px) { body { zoom: 1.0; } }
