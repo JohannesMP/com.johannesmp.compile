@@ -44,17 +44,17 @@ input, #output {
 }
 
 .filename {
-  float:left;
+  float: left;
   margin-bottom: 0.25em;
 }
 
 .removefile {
   position: absolute;
-  right:0;
+  right: 0;
 }
 
-.filecontent, #output {
-  min-height: 10em;
+#output {
+  min-height: 6em;
 }
 
 .contentwrapper {
@@ -64,7 +64,7 @@ input, #output {
 }
 
 #addfile {
-  float:right;
+  float: right;
 }
 
 #argsection {
@@ -73,7 +73,7 @@ input, #output {
 
 #output {
   background-color: black;
-  color:white;
+  color: white;
 }
 
 .rounded {

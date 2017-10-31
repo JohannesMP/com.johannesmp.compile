@@ -95,20 +95,24 @@
       {
         "main.cpp" : 
 `#include "test.hpp"
+
 int main()
 { 
     test("hello world");
     return 0;
-}`,
+}
+`,
 
         "test.hpp" : 
 `#pragma once
 #include <iostream>
 #include <string>
+
 void test(std::string msg)
 { 
     std::cout << msg << std::endl;
-}`
+}
+`
       };
 
       data.write();
