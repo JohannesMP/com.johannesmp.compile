@@ -94,23 +94,35 @@
       data.files = 
       {
         "main.cpp" : 
-`#include "test.hpp"
+`#include "general.hpp"
+#include "printVec.tpp"
 
 int main()
 { 
-    test("hello world");
+    vector<string> toPrint {"Hello", "World"};
+    printVec(toPrint);
     return 0;
 }
 `,
 
-        "test.hpp" : 
+        "general.hpp" : 
 `#pragma once
 #include <iostream>
+using std::cout; using std::endl;
+#include <vector>
+using std::vector;
 #include <string>
+using std::string;
+`,
 
-void test(std::string msg)
+        "printVec.tpp" :
+`#include "general.hpp"
+
+template<typename T>
+void printVec(const vector<T>& vec)
 { 
-    std::cout << msg << std::endl;
+    for(const T& el : vec)
+        cout << " - " << el << endl;
 }
 `
       };
