@@ -42,6 +42,9 @@ var editor =
     indentUnit: 4,
     tabSize: 4,
     keyMap: "sublime",
+    rulers: [{ color: "rgba(255,255,255,0.15)", column: 80, lineStyle: "dashed" }],
+    foldGutter: true,
+    gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
   }
 }
 
