@@ -34,6 +34,6 @@ I'd like to work on the following, time permitting:
          - Gist uploads (require login?)
     - Query string to allow sharing of gists and compiling
     - Embed version for portfolio demos
-- Make Console output also use CodeMirror
+- Use CodeMirror for console output
     - General bash-style colors
     - Syntax/error highlighting for g++ output
