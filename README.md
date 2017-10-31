@@ -37,3 +37,7 @@ I'd like to work on the following, time permitting:
 - Use CodeMirror for console output
     - General bash-style colors
     - Syntax/error highlighting for g++ output
+- Look into proper backend
+    - Framework like Ember, though ideally lightweight
+    - Switch to modules (browserify/RequireJS/etc)
+- HTTPS for github pages(?)
