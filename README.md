@@ -9,9 +9,9 @@
 I'd like to work on the following, time permitting:
 
 ## Bugs/Fixes
-- Scrolling problems when close to min-height of editors.
-- Occasional errors when adding/removing files repeatedly.
-- iOS scaling(viewport) 
+- Scrolling problems when close to min-height of editors
+- Occasional errors when adding/removing files repeatedly
+- iOS scaling (viewport) 
 - iOS scrolling (horizontal not wrapping or scrolling)
 - Disable buttons while document is still loading (for low-speed mobile connections)
 - General code smell; Need to pay of code debt of quick prototyping
@@ -35,4 +35,5 @@ I'd like to work on the following, time permitting:
     - Query string to allow sharing of gists and compiling
     - Embed version for portfolio demos
 - Make Console output also use CodeMirror
+    - General bash-style colors
     - Syntax/error highlighting for g++ output
