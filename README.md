@@ -29,3 +29,5 @@ I'd like to add the following, time permitting:
          - Gist uploads (require login?)
     - Query string to allow sharing of gists and compiling
     - Embed version for portfolio demos
+- Make Console output also use CodeMirror
+    - Syntax/error highlighting for g++ output
