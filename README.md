@@ -25,6 +25,7 @@ I'd like to add the following, time permitting:
 - Expanded Compiler args
     - Macro definition UI to make composing the final cmd easier
     - Macro highlighting
+    - Preview of composed cmd
 - Support for [gists](gist.github.com)
     - Github OAuth login
     - Github gist API
