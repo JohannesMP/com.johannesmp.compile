@@ -105,16 +105,6 @@ int main()
 }
 `,
 
-        "general.hpp" : 
-`#pragma once
-#include <iostream>
-using std::cout; using std::endl;
-#include <vector>
-using std::vector;
-#include <string>
-using std::string;
-`,
-
         "printVec.tpp" :
 `#include "general.hpp"
 
@@ -124,6 +114,16 @@ void printVec(const vector<T>& vec)
     for(const T& el : vec)
         cout << " - " << el << endl;
 }
+`,
+
+        "general.hpp" : 
+`#pragma once
+#include <iostream>
+using std::cout; using std::endl;
+#include <vector>
+using std::vector;
+#include <string>
+using std::string;
 `
       };
 
