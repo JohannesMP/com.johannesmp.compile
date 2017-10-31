@@ -13,7 +13,7 @@ I'd like to add the following, time permitting:
 - Occasional errors when adding/removing files repeatedly.
 - iOS scaling
 - Disable buttons while document is still loading (for low-speed mobile connections)
-- General code smell; need to pay of code debt of quick prototyping
+- General code smell; Need to pay of code debt of quick prototyping
 
 
 ## Features
@@ -21,7 +21,7 @@ I'd like to add the following, time permitting:
 - Editor Color scheme selection
 - Settings menu
     - And the ability to save them (ex. cookie)
-- Expanded 
+- Other view modes, such as tabbed, or fullscreen.
 - Support for [gists](gist.github.com)
     - Github OAuth login
     - Github gist API
