@@ -22,6 +22,9 @@ I'd like to add the following, time permitting:
 - Settings menu
     - And the ability to save them (ex. cookie)
 - Other view modes, such as tabbed, or fullscreen.
+- Expanded Compiler args
+    - Macro definition UI to make composing the final cmd easier
+    - Macro highlighting
 - Support for [gists](gist.github.com)
     - Github OAuth login
     - Github gist API
