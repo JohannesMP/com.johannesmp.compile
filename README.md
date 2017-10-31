@@ -1,7 +1,7 @@
 #### A small web-based multi-file compiler: [Live version](http://compile.johannesmp.com/)
 
-- Syntax Highlighting and Text editing provided by [CodeMirror](http://codemirror.net/)
-- Compiling backend provided by [Coliru](coliru.stacked-crooked.com)
+- Syntax Highlighting and Text editing provided by [CodeMirror](http://codemirror.net/) ([Github Repo](https://github.com/codemirror/codemirror))
+- Compiling backend provided by [Coliru](coliru.stacked-crooked.com) ([Github Repo](https://github.com/StackedCrooked/coliru))
 
 
 # Todo
