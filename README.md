@@ -6,12 +6,13 @@
 
 # Todo
 
-I'd like to add the following, time permitting:
+I'd like to work on the following, time permitting:
 
-## Bugfixes
+## Bugs/Fixes
 - Scrolling problems when close to min-height of editors.
 - Occasional errors when adding/removing files repeatedly.
-- iOS scaling
+- iOS scaling(viewport) 
+- iOS scrolling (horizontal not wrapping or scrolling)
 - Disable buttons while document is still loading (for low-speed mobile connections)
 - General code smell; Need to pay of code debt of quick prototyping
 
