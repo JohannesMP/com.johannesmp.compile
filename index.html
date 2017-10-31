@@ -6,9 +6,43 @@
   <title>Multi-file C++ Compiler</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
+  <!-- CodeMirror Core -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.min.css" rel="stylesheet" type="text/css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/mode/clike/clike.min.js"></script>
+
+  <!-- CodeMirror Addons -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/search/search.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/search/searchcursor.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/dialog/dialog.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/dialog/dialog.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/wrap/hardwrap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/fold/foldcode.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/fold/brace-fold.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/fold/foldgutter.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/fold/foldgutter.min.css" rel="stylesheet" type="text/css"> 
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/selection/active-line.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/edit/closebrackets.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/display/rulers.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/comment/comment.min.js"></script>
+
+  <!-- CodeMirror Themes -->
+  <link href="/static/lib/codemirror/theme/material.css" rel="stylesheet" type="text/css">
+  <link href="/static/lib/codemirror/theme/tomorrow-night.css" rel="stylesheet" type="text/css">
+
+  <!-- CodeMirror Keymaps -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/keymap/sublime.js"></script>
+
   <link href="/static/css/compiler.css" rel="stylesheet" type="text/css">
-  <link href="/static/css/ace.css" rel="stylesheet" type="text/css">
   <link rel="shortcut icon" href="/favicon.ico">
+
+  <style>
+    .CodeMirror {
+      float: left;
+      width: 100%;
+    }
+  </style>
 </head>
 <body>
     <div id="editor">
@@ -39,9 +73,7 @@
       </form>
     </div>
     <br />
-
     <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-    <script src="/external/ace/src-min-noconflict/ace.js"></script>
     <script src="/static/js/compiler.js"></script>
     <script>
       data.files = 
@@ -55,7 +87,8 @@ int main()
 }`,
 
         "test.hpp" : 
-`#include <iostream>
+`#pragma once
+#include <iostream>
 #include <string>
 void test(std::string msg) 
 { 

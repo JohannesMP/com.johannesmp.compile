@@ -1,58 +1,70 @@
 var url = "http://coliru.stacked-crooked.com/compile";
 
 var defaultEditorFile = `
-    <div class="form-group">
+    <div class="form-group clearfix">
       <input class="filename form-control">
       <button class="removefile btn btn-danger">Remove</button>
-      <pre class="filecontent full rounded"></pre>
+      <textarea class="filecontent"></textarea>
     </div>
     `
 
 // Dom Elements
-var editor =
+var elements =
 {
   args    : $("#args"),
   files   : $("#files"),
   addfile : $("#addfile"),
   compile : $("#compile"),
-  output  : $("#output")
+  output  : $("#output"),
 };
 
-var aceEditors = {};
+// Editor Objects
+var editor = 
+{
+  containers : {},
+  count : 0,
 
-var editorCount = 0;
+  // CodeMirror options
+  options : 
+  {
+    lineNumbers: true,
+    mode:  "text/x-c++src",
+    theme: "material",
+    autoCloseBrackets: true,
+    matchBrackets: true,
+    showCursorWhenSelecting: true,
+    indentUnit: 4,
+    tabSize: 4,
+    keyMap: "sublime",
+  }
+}
 
-// Data
+// Editor Data
 var data =
 {
   args : "clang++ -std=c++14 -O2 -Wall -pedantic -Weffc++ -pthread ${cppFiles} && ./a.out",
 
   // reads in data from editor
   read : function() {
-    this.args  = editor.args.val();
+    this.args  = elements.args.val();
     this.files = {};
 
-    var that = this;
-
-    var fileElements = $(editor.files.find(".file"));
-    fileElements.each(function() {
-        var element = $(this);
-        var filename = $(element.find("input.filename")[0]).val();
-        var contentElement = $(element.find('.filecontent')[0]);
-        var elementID = contentElement.attr('id');
-
-        var fileContent = aceEditors[elementID].getValue();
-
-        that.files[filename] = fileContent;
-      });
+    for(var i = 1; i <= editor.count; ++i)
+    {
+      var id = `filecontent_${i}`;
+      var container = editor.containers[id];
+      var content = container.getValue();
+      var filename = $(`#filename_${i}`).val();
+      this.files[filename] = content;
+    }
 
     return this;
   },
 
   // writes data to editor
   write : function() {
-    editor.args.val(this.args);
-    editor.files.html("");
+    elements.args.val(this.args);
+    elements.files.html("");
     for(var filename in this.files)
     {
       var content = this.files[filename];
@@ -63,20 +75,19 @@ var data =
 
 
 $(document).ready(function() {
-  editor.compile.click(function(e) {
+  elements.compile.click(function(e) {
     e.preventDefault();
     ShowOutput("Waiting for server...");
     Compile();
   });
 
-  editor.addfile.click(function(e) {
+  elements.addfile.click(function(e) {
     e.preventDefault();
     addEditorFile("filename", "", true);
   })
 });
 
-function escapeHTML(input)
-{
+function escapeHTML(input) {
   return $("<div>").text(input).html()
 }
 
@@ -86,34 +97,27 @@ function addEditorFile(filename, filecontent, byUser) {
   else
     console.log(`File added: ${filename}`);
 
-  ++editorCount;
+  ++editor.count;
 
   // escape for ace
   var content = escapeHTML(filecontent);
 
   var element = $(`<div class="file"></div>`)
   element.html(defaultEditorFile);
-  editor.files.append(element);
+  elements.files.append(element);
 
   var nameElement = $(element.find(".filename")[0]);
   nameElement.val(filename);
+  var nameID = `filename_${editor.count}`;
+  nameElement.attr('id', nameID);
 
   var contentElement = $(element.find(".filecontent")[0])
   contentElement.html(content);
-
-  var contentID = `editor_${editorCount}`
+  var contentID = `filecontent_${editor.count}`
   contentElement.attr('id', contentID);
 
-  // Set up ace editor
-  aceEditors[contentID] = ace.edit(contentID);
-  aceEditors[contentID].setOptions({
-    maxLines: Infinity, 
-    fontSize: "12pt",
-
-  });
-  aceEditors[contentID].$blockScrolling = Infinity;
-  aceEditors[contentID].setTheme("ace/theme/tomorrow_night");
-  aceEditors[contentID].getSession().setMode('ace/mode/c_cpp');
+  // Set up editor container
+  editor.containers[contentID] = CodeMirror.fromTextArea(contentElement[0], editor.options);
 
   var deleteButton = $(element.find(".removefile")[0]);
 
@@ -121,13 +125,13 @@ function addEditorFile(filename, filecontent, byUser) {
     e.preventDefault();
     console.log(`File Removed ${filename}`);
 
-    // remove the ace editor backend
-    aceEditors[contentID].remove();
+    // remove the editor backend
+    editor.containers[contentID].toTextArea();
     // remove the mapping
-    delete aceEditors[contentID];
+    delete editor.containers[contentID];
     // remove the dom element
     element.remove();
-    --editorCount;
+    --editor.count;
   });
 
   if(byUser)
@@ -167,7 +171,7 @@ function BuildCommand(input) {
 }
 
 function ShowOutput(output) {
-  editor.output.html(output);
+  elements.output.html(output);
 }
 
 function ShowSuccess(reply) {
