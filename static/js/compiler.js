@@ -2,9 +2,15 @@ var url = "http://coliru.stacked-crooked.com/compile";
 
 var defaultEditorFile = `
     <div class="form-group clearfix">
-      <input class="filename form-control">
-      <button class="removefile btn btn-danger">Remove</button>
-      <textarea class="filecontent"></textarea>
+      <div class="input-group clearfix">
+        <input class="filename form-control">
+        <span class="input-group-btn">
+          <button class="removefile btn btn-danger">Remove</button>
+        </span>
+      </div>
+      <div class="contentwrapper clearfix">
+        <textarea class="filecontent"></textarea>
+      </contentwrapper
     </div>
     `
 

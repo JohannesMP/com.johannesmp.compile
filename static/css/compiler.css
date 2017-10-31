@@ -38,16 +38,10 @@ input, #output {
   margin-top: 0.4em;
 }
 
-#args {
-  margin-bottom: 0.5em;
-}
-
 .file {
   position: relative;
   transition: all 0.1s;
 }
-
-
 
 .filename {
   float:left;
@@ -63,9 +57,20 @@ input, #output {
   min-height: 10em;
 }
 
+.contentwrapper {
+  margin-top: 0.2em;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
 #addfile {
   float:right;
 }
+
+#argsection {
+  margin-bottom: 0.6em;
+}
+
 #output {
   background-color: black;
   color:white;

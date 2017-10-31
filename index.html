@@ -4,6 +4,7 @@
   <meta http-equiv="content-type" content="text/html; charset=utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Multi-file C++ Compiler</title>
+  <!-- Bootstrap -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
   <!-- CodeMirror Core -->
@@ -13,63 +14,78 @@
 
   <!-- CodeMirror Addons -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/search/search.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/search/searchcursor.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/dialog/dialog.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/dialog/dialog.min.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/dialog/dialog.min.css" rel="stylesheet" type="text/css">
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/wrap/hardwrap.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/fold/foldcode.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/fold/brace-fold.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/fold/foldgutter.min.js"></script>
   <link href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/fold/foldgutter.min.css" rel="stylesheet" type="text/css"> 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/selection/active-line.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/edit/closebrackets.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/display/rulers.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/comment/comment.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/edit/trailingspace.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/addon/fold/comment-fold.min.js"></script>
+
+  <!-- CodeMirror Keymaps -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/keymap/sublime.js"></script>
 
   <!-- CodeMirror Themes -->
   <link href="/static/lib/codemirror/theme/material.css" rel="stylesheet" type="text/css">
   <link href="/static/lib/codemirror/theme/tomorrow-night.css" rel="stylesheet" type="text/css">
 
-  <!-- CodeMirror Keymaps -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/keymap/sublime.js"></script>
-
+  <!-- Local styles -->
   <link href="/static/css/compiler.css" rel="stylesheet" type="text/css">
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link href="/static/css/codemirror.css" rel="stylesheet" type="text/css">
 
-  <style>
-    .CodeMirror {
-      float: left;
-      width: 100%;
-    }
-  </style>
+  <link rel="shortcut icon" href="/favicon.ico">
 </head>
 <body>
     <div id="editor">
       <div class="jumbotron clearfix">
         <h1>Multi-file C++ Compiler</h1>
         <p class="lead float-left">By <a href="github.com/JohannesMP">JohannesMP</a></p>
-        <p class="lead float-right">Powered by <a href="http://coliru.stacked-crooked.com/">http://coliru.stacked-crooked.com/</a></p>
+        <p class="lead float-right">Powered by <a href="http://codemirror.net">CodeMirror</a> and <a href="http://coliru.stacked-crooked.com/">Coliru</a></p>
       </div>
 
       <form>
-        <label class="full">
-          <b>Compile Args:</b> 
-          <span class="aside"><em><b>${cppFiles}</b> is replaced by all .cpp files</em></span>
-          <input id="args" class="form-control">
-        </label>
-
-        <div id="filesection">
+        <div id="filesection" class="clearfix">
           <b>Files:</b>
           <div id="files">
           </div>
           <button id="addfile" class="btn btn-primary">+ File</button>
         </div>
 
-        <button id="compile" class="btn btn-success">Compile</button>
         <hr />
-        <b>Console Output:</b>
-        <pre id="output" class="full rounded" readonly spellcheck="false"></pre>
+
+        <div id="argsection" class="clearfix">
+          <b>Compile Args:</b>
+          <div class="input-group">
+            <input id = "args"type="text" class="form-control">
+            <span class="input-group-btn">
+              <button id="compile" class="btn btn-success">Compile</button>
+            </span>
+          </div>
+        </div>
+
+        <div id="consolesection">
+          <b>Console Output:</b>
+          <pre id="output" class="full rounded" readonly spellcheck="false"></pre>
+        </div>
       </form>
     </div>
     <br />
@@ -80,19 +96,19 @@
       {
         "main.cpp" : 
 `#include "test.hpp"
-int main() 
+int main()
 { 
     test("hello world");
-    return 0; 
+    return 0;
 }`,
 
         "test.hpp" : 
 `#pragma once
 #include <iostream>
 #include <string>
-void test(std::string msg) 
+void test(std::string msg)
 { 
-    std::cout << msg << std::endl; 
+    std::cout << msg << std::endl;
 } `
       };
 
