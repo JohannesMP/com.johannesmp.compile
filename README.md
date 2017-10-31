@@ -6,7 +6,7 @@
 
 # Todo
 
-The following still need to be done:
+I'd like to add the following, time permitting:
 
 ## Bugfixes
 - Scrolling problems when close to min-height of editors.
