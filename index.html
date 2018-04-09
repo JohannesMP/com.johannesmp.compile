@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Multi-file C++ Compiler</title>
   <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+  <link rel="stylesheet" href="assets/vendor/bootstrap-4.0.0/css/bootstrap.min.css">
 
   <!-- CodeMirror Core -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/codemirror.min.js"></script>
@@ -45,13 +45,16 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.31.0/keymap/sublime.js"></script>
 
   <!-- CodeMirror Themes -->
-  <link href="static/lib/codemirror/theme/material.css" rel="stylesheet" type="text/css">
-  <link href="static/lib/codemirror/theme/tomorrow-night.css" rel="stylesheet" type="text/css">
+  <link href="assets/vendor/codemirror/theme/material.css" rel="stylesheet" type="text/css">
+  <link href="assets/vendor/codemirror/theme/tomorrow-night.css" rel="stylesheet" type="text/css">
 
   <!-- Local styles -->
-  <link href="static/css/compiler.css" rel="stylesheet" type="text/css">
-  <link href="static/css/codemirror.css" rel="stylesheet" type="text/css">
+  <link href="assets/css/compiler.css" rel="stylesheet" type="text/css">
+  <link href="assets/css/codemirror.css" rel="stylesheet" type="text/css">
   
+  <!-- jQuery  -->
+  <script src="assets/vendor/jquery-3.3.1/jquery.min.js"></script>
+
   <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-67064476-2"></script>
 <script>
@@ -65,18 +68,35 @@
 </head>
 <body>
     <div id="editor">
+
       <div class="jumbotron clearfix">
         <h1>Multi-file C++ Compiler</h1>
         <p class="lead float-left">By <a href="http://www.github.com/JohannesMP">JohannesMP</a></p>
         <p class="lead float-right">Powered by <a href="http://codemirror.net">CodeMirror</a> and <a href="http://coliru.stacked-crooked.com/">Coliru</a></p>
       </div>
 
-      <form>
+      <form id=gist-form>
+        <div id="gistsection" class="clearfix">
+          <div class="input-group">
+            <input id="gist-field" type="text" pattern="[a-f,0-9]{32}" class="form-control" placeholder="Paste gist URL, or enter a Gist ID (32 hex characters)" autocomplete=off>
+            <div class="input-group-append">
+              <button id="gist-download" class="btn btn-secondary">Load Gist</button>
+              <!-- Disabled since gists requrie authentication to upload...  -->
+             <!--  <button id="gist-save" class="btn btn-primary ml-1" type="button">Save as New Gist</button> -->
+              <button id="gist-reset" class="btn btn-warning ml-1" type="button">Reset</button>
+            </div>
+          </div>
+        </div>
+      </form>
+      <br>
+
+      <form id=file-form>
         <div id="filesection" class="clearfix">
           <b>Files:</b>
           <div id="files">
           </div>
           <button id="addfile" class="btn btn-primary">+ File</button>
+
         </div>
 
         <div id="argsection" class="clearfix">
@@ -84,7 +104,7 @@
           <span class="aside"><em><b>${cppFiles}</b> is replaced by all .cpp files</em></span>
           <div class="input-group">
             <input id = "args"type="text" class="form-control">
-            <span class="input-group-btn">
+            <span class="input-group-append">
               <button id="compile" class="btn btn-success">Compile</button>
             </span>
           </div>
@@ -99,8 +119,9 @@
     
     <a class="d-none d-lg-block" href="https://github.com/JohannesMP/com.johannesmp.compile"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/e7bbb0521b397edbd5fe43e7f760759336b5e05f/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f677265656e5f3030373230302e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png"></a>
 
-    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-    <script src="static/js/compiler.js"></script>
+    <script src="assets/js/queryString.js"></script>
+    <script src="assets/js/gist.js"></script>
+    <script src="assets/js/compiler.js"></script>
     <script>
       data.files = 
       {
@@ -138,7 +159,6 @@ using std::string;
 `
       };
 
-      data.write();
     </script>
   </div>
 </body>
